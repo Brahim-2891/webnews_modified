@@ -1,0 +1,30 @@
+{% extends 'header.html' %}
+
+{% block title %}تسجيل حساب جديد{% endblock %}
+
+{% block content%}
+
+<div class="container">
+    <h1 class="text-center mt-5">تسجيل حساب جديد</h1>
+    <form method="POST" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+        </div>
+    </form>
+    <p class="text-center">هل لديك حساب بالفعل؟ <a href="{{ url_for('login') }}">تسجيل الدخول</a></p>
+</div>
+{% endblock %}
+

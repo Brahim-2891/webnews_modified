@@ -1,0 +1,51 @@
+{% extends 'header.html' %}
+
+{% block title %}الصفحة الرئيسية{% endblock %}
+
+{% block content %}
+<div id="myCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for new in all_news %}
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}" 
+                    class="{% if loop.index == 1 %}active{% endif %}" 
+                    aria-label="Slide {{ loop.index }}"></button>
+        {% endfor %}
+    </div>
+    <div class="container mt-4 mb-4 p-3">
+    <div class="carousel-inner">
+        {% for new in all_news %}
+        <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+            <img src="{{ new.img_url }}" alt="{{ new.title }}" class="d-block w-100" style="height: 500px; object-fit: cover;">
+            <div class="container">
+                <div class="carousel-caption {% if loop.index == 1 %}text-end{% else %}text-start{% endif %}">
+                    <h1>{{ new.title }}</h1>
+                    <p>{{ new.article[:100] }}...</p> <!-- Show a short excerpt -->
+                    <p><a class="btn btn-lg btn-primary" href="{{ url_for('read_news', news_id=new.id) }}">اقرأ المزيد</a></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div class="container mt-4 mb-4 p-3">
+    <div class="row">
+        {% for new in all_news %} <!-- Display only the first three news articles -->
+        <div class="col-lg-4">
+            <img src="{{ url_for('static', filename=new.img_url) }}" alt="{{ new.title }}" class="bd-placeholder-img" style="width: 100%; height: auto; object-fit: cover; border-radius: 0;">
+            <h2>{{ new.title }}</h2>
+            <p>{{ new.article[:100] }}...</p> <!-- Show a short excerpt -->
+            <p><a class="btn btn-secondary" href="{{ url_for('read_news', news_id=new.id) }}">عرض التفاصيل »</a></p>
+        </div><!-- /.col-lg-4 -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

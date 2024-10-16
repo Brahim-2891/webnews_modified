@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+
+{% block title %}Edit News{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Edit News</h2>
+    <form action="{{ url_for('edit_news', news_id=news.id) }}" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ news.title }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="article" class="form-label">Article</label>
+            <textarea class="form-control" id="article" name="article" rows="5" required>{{ news.article }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="img_url" class="form-label">Image URL</label>
+            <input type="text" class="form-control" id="img_url" name="img_url" value="{{ news.img_url }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ</button>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">الغاء</a>
+    </form>
+</div>
+{% endblock %}

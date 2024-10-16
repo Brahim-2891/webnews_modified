@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    background-color: aquamarine;
+}
+
+.row {
+    background-color: blueviolet;
+}
+
+.icon-spacing {
+    margin-right: 10px; 
+}
